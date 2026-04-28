@@ -1,28 +1,26 @@
-import { useQuery } from '@tanstack/react-query';
-import { Demo } from './components/demo';
+import { createBrowserRouter } from 'react-router';
+import { RouterProvider } from 'react-router/dom';
+import { appLoader, authLoader } from './lib/auth';
+import { GlobalFallback } from './components/global-fallback';
+import { ErrorPage } from '@/pages/error/page';
 
-interface Response {
-  message: string;
-}
-
-const API_URL = import.meta.env.VITE_API_URL;
+const router = createBrowserRouter([
+  {
+    loader: appLoader,
+    path: '/',
+    hydrateFallbackElement: <GlobalFallback />,
+    errorElement: <ErrorPage />,
+    lazy: () => import('@/pages/home/page'),
+  },
+  {
+    loader: authLoader,
+    hydrateFallbackElement: <GlobalFallback />,
+    errorElement: <ErrorPage />,
+    path: '/login',
+    lazy: () => import('@/pages/login/page'),
+  },
+]);
 
 export default function App() {
-  const { data, isLoading, error } = useQuery<Response>({
-    queryKey: ['demo'],
-    queryFn: () => fetch(`${API_URL}/posts`).then((res) => res.json()),
-  });
-
-  console.log('API URL', API_URL);
-
-  console.log('Data', data);
-
-  return (
-    <>
-      {isLoading && <div>Loading...</div>}
-      {error && <div>Error: {error.message}</div>}
-      {data && <div>Data: {data.message}</div>}
-      <Demo />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }

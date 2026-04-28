@@ -12,14 +12,29 @@
     ],
     "skipLibCheck": true,
     "paths": {
+      "*": [
+        "./src/*"
+      ],
+      "@/api/*": [
+        "./src/api/*"
+      ],
       "@/assets/*": [
         "./src/assets/*"
       ],
       "@/components/*": [
         "./src/components/*"
       ],
+      "@/hooks/*": [
+        "./src/hooks/*"
+      ],
       "@/lib/*": [
         "./src/lib/*"
+      ],
+      "@/pages/*": [
+        "./src/pages/*"
+      ],
+      "@/stores/*": [
+        "./src/stores/*"
       ],
     },
     /* Bundler mode */
