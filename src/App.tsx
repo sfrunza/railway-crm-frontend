@@ -15,6 +15,8 @@ export default function App() {
 
   console.log('API URL', API_URL);
 
+  console.log('Data', data);
+
   return (
     <>
       {isLoading && <div>Loading...</div>}
