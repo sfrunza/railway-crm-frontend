@@ -47,7 +47,7 @@ export function useAuth() {
       clearAuth();
       localStorage.removeItem('session_token');
       queryClient.clear();
-      window.location.assign('/login');
+      window.location.assign('/auth/login');
     },
   });
 

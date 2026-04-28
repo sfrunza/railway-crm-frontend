@@ -30,7 +30,7 @@ export interface AuthResult {
  * Creates a redirect response to login page
  */
 export const createLoginRedirect = (returnTo: string) => {
-  return redirect(`/login?return_to=${encodeURIComponent(returnTo)}`);
+  return redirect(`/auth/login?return_to=${encodeURIComponent(returnTo)}`);
 };
 
 /**
@@ -124,14 +124,14 @@ export const rootLoader = async () => {
     const { user } = await validateSession();
 
     if (!user) {
-      return redirect('/login');
+      return redirect('/auth/login');
     }
 
     useAuthStore.getState().setUser(user);
     // return redirect(getPortalForRole(user.role));
   } catch (err) {
     console.error('Root loader error:', err);
-    return redirect('/login');
+    return redirect('/auth/login');
   }
 };
 
