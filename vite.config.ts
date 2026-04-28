@@ -16,4 +16,12 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+      "/api/v1": {
+        target: process.env.VITE_API_URL,
+        changeOrigin: true,
+      },
+    },
+  },
 })
