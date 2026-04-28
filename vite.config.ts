@@ -6,6 +6,7 @@ import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: "/",
   plugins: [
     react(),
     babel({ presets: [reactCompilerPreset()] }),
@@ -14,14 +15,6 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-    },
-  },
-  server: {
-    proxy: {
-      "/api/v1": {
-        target: process.env.VITE_API_URL,
-        changeOrigin: true,
-      },
     },
   },
 })
